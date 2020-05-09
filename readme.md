@@ -2,7 +2,7 @@
 * An Application which enables you to discover, meet, talk with people around you, **Anonymously**.
 
 ## Description
-* An web appication made using Node.js, Express.js, MongoDB, Bootstrap
+* A web application made using Node.js, Express.js, MongoDB, Bootstrap
 
 ## Use Case
 * Let's say that you are going to attend a Workshop/Fest/Conference or going to any other new place where you don't know people & want to talk to people, make new friends, without revealing anything about yourself, even without meeting them physically, then here comes this application into the mix & lets you search for nearby people, within a specific range like 1kms, 2kms (you can decide the limit), around yourself, and you can interact & chat with them one-to-one, while remaining totally **anonymous**. Then if you want to reveal yourselves, you can reveal your information, share your location with them, & hangout together... 👈 😎👉
