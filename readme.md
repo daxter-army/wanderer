@@ -10,11 +10,11 @@
 ## Features
 * You can chat with unknown people around you, while remaining totally anonymous
 * Chat is prefitted with profanity filter, so will filter out bad words
-* You can block a person if he/she is not behaving ethically with you *(Coming Soon)*
+* You can block a person if they aren't behaving appropriate, ethically with you *(Coming Soon)*
     * 1st block : Warning!
     * 2nd block : Block completely
 * You can make your account private or public based upon your preferences *(Coming Soon)*
-    * Public : only avatar and username is visible on your profile
+    * Public : Only avatar and username is visible on your profile
     * Private : Your info will also be visible there
 
 ### Status : Under Development
