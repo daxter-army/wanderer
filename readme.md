@@ -9,7 +9,9 @@
 
 ## Features
 * You can chat with unknown people around you, while remaining totally anonymous
-* Chat is prefitted with profanity filter, so will filter out bad words
+* Location sharing
+* Chat is prefitted with profanity filter, so will **filter out bad words**
+* Your Chats are **SAFE** with us, never lose them
 * You can block a person if they aren't behaving appropriate, ethically with you *(Coming Soon)*
     * 1st block : Warning!
     * 2nd block : Block completely
