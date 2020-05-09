@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="css/chat/img/favicon.png">
+    <link rel="stylesheet" href="css/chat/css/styles.css">
+    <title>Wanderer</title>
+</head>
+<body>
+    <h1>From Chat client</h1>
+    <p>Room : <span id="room-no"></span></p>
+    <p>To : <span id="receiver"></span></p>
+
+    <div id="messages"></div>
+
+        <form id="message-form">
+            <input name="message" placeholder="Message" autocomplete="off" required>
+            <button>Send</button>
+        </form>
+        <button id="send-location">Share Location</button>
+
+        <script id="message-template" type="text/html">
+            <div class="message">
+                <p>
+                    <span class="message__name">{{username}}</span>
+                    <span class="message__meta">{{createdAt}}</span>
+                </p>
+                <p>{{message}}</p>
+            </div>
+        </script>
+
+        <script id="location-message-template" type="text/html">
+            <div class="message">
+                <p>
+                    <span class="message__name">{{username}}</span>
+                    <span class="message__meta">{{createdAt}}</span>
+                </p>
+                <p><a href={{url}} target="_blank">I am here</a></p>
+            </div>
+        </script>
+
+    <!-- Loading JS Files -->
+    <script src="/js/mustache.min.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/qs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <form id="logout-form" action="/logout-user" method="POST"><button>Logout</button></form>
+    <form id="logoutAll-form" action="/logoutAll-user" method="POST"><button>Logout All</button></form>
+    <h3>Name : {{name}}</h3>
+    <h3>Username : {{userName}}</h3>
+    <h3>Email ID : {{email}}</h3>
+    <h3>Age : {{age}}</h3>
+
+    {{#if engagedWith}}
+        <h4><a href='http://localhost:3000/chat-user?initiator={{userName}}&receiver={{engagedWith}}&room={{roomNo}}'>New Request from: {{engagedWith}}</a></h4>
+    {{/if}}
+    
+    <form id="create-location-form" action="/myLocation" method="GET"><button>Find People Nearby</button></form>
+</body>
+</html>
