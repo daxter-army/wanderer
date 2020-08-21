@@ -61,13 +61,23 @@ router.post('/login-user', async (req, res) => {
 router.get('/dashboard-user', auth, (req, res) => {
     console.log(chalk.yellow("GET : /dashboard-user"))
 
+    const noRequest = false
+
+    if(req.user.engagedWith){
+        noRequest = true
+    }
+
+    const noRequest = false
+
     res.render("dashboard-user",{
         name: req.user.name,
         userName: req.user.userName,
         email: req.user.email,
         age: req.user.age,
         engagedWith: req.user.engagedWith,
-        roomNo: req.user.roomNo
+        roomNo: req.user.roomNo,
+        id: req.user._id,
+        noRequest: noRequest
     })
 }, (error, req, res, next) => {
     res.status(400).send({error : error.message})
@@ -75,6 +85,8 @@ router.get('/dashboard-user', auth, (req, res) => {
 
 // Update myself
 router.patch('/myself-user', auth, async (req, res) => {
+    console.log(chalk.gray("PATCH : /myself-user"))
+
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'email', 'password', 'age']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -96,6 +108,8 @@ router.patch('/myself-user', auth, async (req, res) => {
 
 // See myself
 router.get('/myself-user' , auth, async (req, res) => {
+    console.log(chalk.yellow("GET : /myself-user"))
+
     res.send(req.user)
 }, (error, req, res, next) => {
     res.status(400).send({error : error.message})
@@ -103,6 +117,8 @@ router.get('/myself-user' , auth, async (req, res) => {
 
 // Logout
 router.post('/logout-user', auth, async (req, res) => {
+    console.log(chalk.cyan("GET : /logout-user"))
+
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
@@ -121,6 +137,8 @@ router.post('/logout-user', auth, async (req, res) => {
 
 // Logout from all logged in devices
 router.post('/logoutAll-user', auth, async (req, res) => {
+    console.log(chalk.cyan("GET : /logoutAll-user"))
+
     try {
         req.user.tokens = []
         await req.user.save()
@@ -135,6 +153,8 @@ router.post('/logoutAll-user', auth, async (req, res) => {
 
 // Delete active user
 router.delete('/myself-user', auth, async (req, res) => {
+    console.log(chalk.red("DELETE : /myself-user"))
+
     try {
         await req.user.remove()
         res.send(req.user)
@@ -160,24 +180,32 @@ const upload = multer({
     }
 })
 router.post('/myself-avatar', auth, upload.single('avatar'),async (req,res) => {
+    console.log(chalk.cyan("GET : /myself-avatar"))
+
     const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
 
     req.user.avatar = buffer
     await req.user.save()
-    res.send()
+
+    res.redirect('/dashboard-user')
+    // res.send()
 }, (error ,req, res, next) => {
     res.status(400).send({error : error.message})
 })
 
 // Delete profile avatar
 router.delete('/myself-avatar', auth, async (req, res) => {
+    console.log(chalk.red("DELETE : /myself-avatar"))
+
     req.user.avatar = undefined
     await req.user.save()
-    res.send()
+    // res.send()
 })
 
 // Display avatar
 router.get('/myself-avatar/:id', async (req, res) => {
+    console.log(chalk.yellow("GET : /myself-avatar/:id"))
+
     try{
         const user = await User.findById(req.params.id)
 

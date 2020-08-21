@@ -19,7 +19,7 @@ router.get('/begin-chat/:userName', auth, async (req, res) => {
     try{
 
         const check = await User.findOne({ userName: initiator})
-        console.log(initiator + "already engaged with" + check.engagedWith)
+        console.log(chalk.blue(initiator + " already engaged with " + check.engagedWith))
     
         if(receiver==check.engagedWith){
             return res.redirect(`http://localhost:3000/chat-user?initiator=${initiator}&receiver=${receiver}&room=${check.roomNo}`)
@@ -44,11 +44,12 @@ router.get('/begin-chat/:userName', auth, async (req, res) => {
 })
 
 router.get('/chat-user', auth, (req,res) => {
-    console.log(chalk.yellow("GET : /chat-user"))
+    console.log(chalk.cyan("GET : /chat-user"))
     res.sendFile('D:\\wanderer_0.2_mutating\\src\\public\\chat.html')
 })
 
 router.post('/retrieve-chat',async (req, res) => {
+    console.log(chalk.yellow("POST : /retrieve-chat"))
 
     const one = req.body.one
     const two = req.body.two

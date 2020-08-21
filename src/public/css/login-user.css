@@ -50,11 +50,11 @@ button {
     outline: none;
 }
 
-#login-p {
+#signup-p {
     font-size: 16px;
 }
 
-#login-link {
+#signup-link {
     padding: 3px 8px;
     background-color: #3498db;
     color: white;
@@ -64,10 +64,6 @@ button {
 }
 
 
-#login-link:hover {
+#signup-link:hover {
     background-color: orange;
 }
-
-/* .signup-form {
-    border : 2px red solid;
-} */

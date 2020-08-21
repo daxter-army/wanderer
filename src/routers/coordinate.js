@@ -83,14 +83,14 @@ router.post('/find-nearby', auth, async (req, res) => {
         // res.send(final_friends)
         const people_around_u = []
 
-        for(var i=0; i<final_friends.length; i++){
+        for(var i=0 ; i<final_friends.length ; i++){
             function getTuple(){
                 return final_friends[i]
             }
             var[lattitude, longitude] = getTuple()
 
             const coordinates = await Coordinate.findOne({lat: lattitude, lon: longitude})
-            const users = await User.findOne({_id: coordinates.owner})
+            const users = await User.findOne({ _id: coordinates.owner })
             // console.log(users)
             people_around_u.push(users.userName)
             // console.log((chalk.blue("People around you : ")) + (chalk.yellow(users.userName)))
@@ -133,7 +133,7 @@ router.patch('/update-location/:id', auth, async (req, res) => {
     }
 
     try {
-        const coordinate = await Coordinate.findOne({ _id: req.params.id, owner: req.user._id})
+        const coordinate = await Coordinate.findOne({ _id: req.params.id, owner: req.user._id })
 
         if (!coordinate) {
             return res.status(404).send()
@@ -161,6 +161,5 @@ router.delete('/delete-location/:id', auth, async (req, res) => {
         res.status(500).send()
     }
 })
-
 
 module.exports = router
