@@ -95,7 +95,7 @@
             response.arrayBuffer().then((buffer) => {
 
                 if( response.status==404 ){
-                    var defaultImg = "/img/avatar.png"
+                    var defaultImg = "https://raw.githubusercontent.com/daxter-army/wanderer/master/src/public/img/avatar.png"
                     document.querySelector('img').src = defaultImg
 
                     document.querySelector('#delete-avatar').setAttribute('disabled','disabled')
