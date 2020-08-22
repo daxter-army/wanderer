@@ -3,14 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanderer</title>
+    <link rel='stylesheet' href='/css/create-location.css'>
+    {{!-- Fontawesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="css/chat/img/favicon.png">
+    <title>Find | {{userName}}</title>
 </head>
+{{>header}}
 <body>
-    <h1>From create Location</h1>
-    <button id="detect-location">Detect My Location</button>
-    <p>Your Location</p>
-    <p id="position"></p>
-    <form id="search-people-form" action="/find-nearby" method="POST"><button id="search-people">Search Nearby People</button></form>
+    <div class="container">
+        <!-- Content between requests -->
+        <div id="myModal" class="modal" style='text-align:left;'>
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                    {{#if engagedWith}}
+                        <a href='http://localhost:3000/chat-user?initiator={{userName}}&receiver={{engagedWith}}&room={{roomNo}}'>{{engagedWith}}</a>
+                    {{/if}}
+                    
+                    {{#if noRequest}}
+                        <a>It's lonely here :/</a>
+                    {{/if}}
+            </div>
+        </div>
+        <div class='wrapper'>
+            <h1>Find Nearby People</h1>
+            <br/>
+            <p>Start by detecting your location</p>
+            <br/>
+            <button id="detect-location" title='Detect Me'><i class="fa fa-compass fa-4x"></i></button>
+            <br/>
+            <br/>
+            <p>Your Location</p>
+            <br/>
+            <p id="position">Locate yourselves first...</p>
+            <br/>
+            <form id="search-people-form" action="/find-nearby" method="POST"><button id="search-people"><i class="fa fa-search fa-4x"></i></button></form>
+        </div>
+    </div>
+    {{>footer}}
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
     <script src="/js/location.js"></script>
 </body>
 </html>

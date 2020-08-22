@@ -6,15 +6,19 @@ const User = require('../models/user')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 
+router.get('/', (req, res) => {
+    res.redirect('/create-user')
+})
+
 // Create yourselves
 router.get('/create-user', async(req, res) => {
-    console.log(chalk.yellow("GET : /create-user"))
+    // console.log(chalk.yellow("GET : /create-user"))
 
     res.render('create-user')
 })
 
 router.post('/create-user', async (req, res) => {
-    console.log(chalk.cyan("POST : /create-user"))
+    // console.log(chalk.cyan("POST : /create-user"))
 
     const user = new User(req.body)
 
@@ -34,13 +38,13 @@ router.post('/create-user', async (req, res) => {
 
 // Login
 router.get('/login-user', (req, res) => {
-    console.log(chalk.yellow("GET : /login-user"))
+    // console.log(chalk.yellow("GET : /login-user"))
 
     res.render('login-user')
 })
 
 router.post('/login-user', async (req, res) => {
-    console.log(chalk.cyan("POST : /login-user"))
+    // console.log(chalk.cyan("POST : /login-user"))
 
     try{
         const user = await User.findByCredentials(req.body.userName, req.body.password)
@@ -52,22 +56,20 @@ router.post('/login-user', async (req, res) => {
         res.redirect('/dashboard-user')
     }
     catch(e) {
-        console.log('bad')
+        // console.log('Unable to login...try again')
         res.status(400).send(e.message)
     }
 })
 
 // Dashboard
 router.get('/dashboard-user', auth, (req, res) => {
-    console.log(chalk.yellow("GET : /dashboard-user"))
+    // console.log(chalk.yellow("GET : /dashboard-user"))
 
-    const noRequest = false
+    var noRequest = true
 
     if(req.user.engagedWith){
-        noRequest = true
+        noRequest = false
     }
-
-    const noRequest = false
 
     res.render("dashboard-user",{
         name: req.user.name,
@@ -85,7 +87,7 @@ router.get('/dashboard-user', auth, (req, res) => {
 
 // Update myself
 router.patch('/myself-user', auth, async (req, res) => {
-    console.log(chalk.gray("PATCH : /myself-user"))
+    // console.log(chalk.gray("PATCH : /myself-user"))
 
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'email', 'password', 'age']
@@ -108,7 +110,7 @@ router.patch('/myself-user', auth, async (req, res) => {
 
 // See myself
 router.get('/myself-user' , auth, async (req, res) => {
-    console.log(chalk.yellow("GET : /myself-user"))
+    // console.log(chalk.yellow("GET : /myself-user"))
 
     res.send(req.user)
 }, (error, req, res, next) => {
@@ -117,7 +119,7 @@ router.get('/myself-user' , auth, async (req, res) => {
 
 // Logout
 router.post('/logout-user', auth, async (req, res) => {
-    console.log(chalk.cyan("GET : /logout-user"))
+    // console.log(chalk.cyan("GET : /logout-user"))
 
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
@@ -137,7 +139,7 @@ router.post('/logout-user', auth, async (req, res) => {
 
 // Logout from all logged in devices
 router.post('/logoutAll-user', auth, async (req, res) => {
-    console.log(chalk.cyan("GET : /logoutAll-user"))
+    // console.log(chalk.cyan("GET : /logoutAll-user"))
 
     try {
         req.user.tokens = []
@@ -153,7 +155,7 @@ router.post('/logoutAll-user', auth, async (req, res) => {
 
 // Delete active user
 router.delete('/myself-user', auth, async (req, res) => {
-    console.log(chalk.red("DELETE : /myself-user"))
+    // console.log(chalk.red("DELETE : /myself-user"))
 
     try {
         await req.user.remove()
@@ -180,7 +182,7 @@ const upload = multer({
     }
 })
 router.post('/myself-avatar', auth, upload.single('avatar'),async (req,res) => {
-    console.log(chalk.cyan("GET : /myself-avatar"))
+    // console.log(chalk.cyan("GET : /myself-avatar"))
 
     const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
 
@@ -195,7 +197,7 @@ router.post('/myself-avatar', auth, upload.single('avatar'),async (req,res) => {
 
 // Delete profile avatar
 router.delete('/myself-avatar', auth, async (req, res) => {
-    console.log(chalk.red("DELETE : /myself-avatar"))
+    // console.log(chalk.red("DELETE : /myself-avatar"))
 
     req.user.avatar = undefined
     await req.user.save()
@@ -204,7 +206,7 @@ router.delete('/myself-avatar', auth, async (req, res) => {
 
 // Display avatar
 router.get('/myself-avatar/:id', async (req, res) => {
-    console.log(chalk.yellow("GET : /myself-avatar/:id"))
+    // console.log(chalk.yellow("GET : /myself-avatar/:id"))
 
     try{
         const user = await User.findById(req.params.id)

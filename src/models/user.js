@@ -99,7 +99,7 @@ userSchema.methods.toJSON = function () {
 // Generate Authorization Token
 userSchema.methods.generateAuthToken = async function () {
     const user = this
-    const token = jwt.sign({ _id: user._id.toString() }, 'mehulsinghteya')
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET)
 
     user.tokens = user.tokens.concat({ token })
     await user.save()
@@ -112,13 +112,13 @@ userSchema.statics.findByCredentials = async (userName, password) => {
     const user = await User.findOne({ userName })
 
     if (!user) {
-        throw new Error('Unable to login')
+        throw new Error("<h2 style='width:80%;margin:auto;margin-top: 20vw;padding: 15px;font-family: DM Sans;text-align: center;border: 1.5px #e74c3c solid;border-radius: 5px;'>User does not exists... Please go to Signup Page to register yourselves</h1>")
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
 
     if (!isMatch) {
-        throw new Error('Unable to login')
+        throw new Error("<h2 style='width:80%;margin:auto;margin-top: 20vw;padding: 15px;font-family: DM Sans;text-align: center;border: 1.5px #e74c3c solid;border-radius: 5px;'>Wrong Email/Password Combination...Try Again!</h1>")
     }
 
     return user

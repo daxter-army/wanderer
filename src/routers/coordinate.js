@@ -12,7 +12,23 @@ const User = require('../models/user')
 const Coordinate = require('../models/coordinate')
 
 router.get('/myLocation', auth, (req, res)=>{
-    res.render('create-location')
+
+    var noRequest = true
+
+    if(req.user.engagedWith){
+        noRequest = false
+    }
+
+    res.render('create-location', {
+        name: req.user.name,
+        userName: req.user.userName,
+        email: req.user.email,
+        age: req.user.age,
+        engagedWith: req.user.engagedWith,
+        roomNo: req.user.roomNo,
+        id: req.user._id,
+        noRequest: noRequest
+    })
 })
 
 router.post('/myLocation', auth, async (req, res) => {
@@ -36,7 +52,7 @@ router.post('/myLocation', auth, async (req, res) => {
 
 //Show all locations
 router.get('/show-locations', auth, async (req, res) => {
-    console.log(chalk.cyan('GET=> /all-location'))
+    // console.log(chalk.cyan('GET=> /all-location'))
     try {
         const location = await Coordinate.find()
         // await req.user.populate('coordinates').execPopulate()
@@ -49,7 +65,7 @@ router.get('/show-locations', auth, async (req, res) => {
 
 // Find nearby
 router.post('/find-nearby', auth, async (req, res) => {
-    console.log(chalk.cyan("POST : /find-nearby"))
+    // console.log(chalk.cyan("POST : /find-nearby"))
 
     try {
         // Fetch coordinates of current active User
@@ -60,7 +76,7 @@ router.post('/find-nearby', auth, async (req, res) => {
 
         const find = await Coordinate.find()
 
-        console.log(lat_from.value, lon_from.value)
+        // console.log(lat_from.value, lon_from.value)
         
         if(!(find || lat_from || lon_from))
             console.log(chalk.red("Database is Empty"))
@@ -83,11 +99,11 @@ router.post('/find-nearby', auth, async (req, res) => {
         // res.send(final_friends)
         const people_around_u = []
 
-        for(var i=0 ; i<final_friends.length ; i++){
+        for(var i=0 ; i < final_friends.length ; i++){
             function getTuple(){
                 return final_friends[i]
             }
-            var[lattitude, longitude] = getTuple()
+            var [lattitude, longitude] = getTuple()
 
             const coordinates = await Coordinate.findOne({lat: lattitude, lon: longitude})
             const users = await User.findOne({ _id: coordinates.owner })
@@ -95,7 +111,15 @@ router.post('/find-nearby', auth, async (req, res) => {
             people_around_u.push(users.userName)
             // console.log((chalk.blue("People around you : ")) + (chalk.yellow(users.userName)))
         }
+        // console.log(people_around_u)
         res.render('find-nearby',{
+            name: req.user.name,
+            userName: req.user.userName,
+            email: req.user.email,
+            age: req.user.age,
+            engagedWith: req.user.engagedWith,
+            roomNo: req.user.roomNo,
+            id: req.user._id,
             peopleAroundU: people_around_u
         })
     }

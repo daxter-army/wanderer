@@ -63,6 +63,8 @@ socket.on('locationMessage', (message) => {
 const { initiator, receiver, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
 
 // Reading & Setting Values in HTML File
+const ini = document.getElementById('initiator')
+ini.innerHTML = initiator
 const rec = document.querySelector('#receiver')
 rec.innerHTML = receiver
 const roomNo = document.querySelector('#room-no')

@@ -25,7 +25,7 @@ require('./db/mongoose')
 
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 //For Browser
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -54,7 +54,7 @@ const server = http.createServer(app)
 const io = socketio(server)
 
 io.on('connection', (socket) => {
-    console.log('New WebSocket connection')
+    // console.log('New WebSocket connection')
 
     // For Setting up room
     socket.on('join', async ({ username, room }, callback) => {
@@ -106,9 +106,9 @@ io.on('connection', (socket) => {
             sender : user.username
         })
         
-        chatMessage.save().then(()=> {
-            console.log("Saved Chat Successfully")
-        })
+        // chatMessage.save().then(()=> {
+        //     console.log("Saved Chat Successfully")
+        // })
         
         callback()
     })

@@ -35,10 +35,11 @@ document.querySelector('#detect-location').addEventListener('click', () => {
         })
 
         if(result){
-            lat_lon.innerHTML = "Latitude : " + position.coords.latitude + "<br>Longitude : " + position.coords.longitude
+            lat_lon.innerHTML = "Latitude : " + position.coords.latitude + "<br>Longitude : " + position.coords.longitude + '<br/><br/><br/>Search nearby people'
+            document.getElementById('search-people').style.cursor = 'pointer'
         }
         else{
-            lat_lon.innerHTML = "Unable to locate"
+            lat_lon.innerHTML = "Something went wrong... try again"
         }
     })
     document.querySelector('#detect-location').disabled = false

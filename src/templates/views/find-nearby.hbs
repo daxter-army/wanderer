@@ -3,14 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanderer | Find Nearby</title>
+    <link rel='stylesheet' href='/css/find-nearby.css'>
+    <link rel="icon" href="css/chat/img/favicon.png">
+    <title>Nearby you | {{userName}}</title>
 </head>
 <body>
-    <h1>From find-nearby</h1>
-    <ul>
-    {{#each peopleAroundU}}
-        <li><p>{{this}}</p><a href="http://localhost:3000/begin-chat/{{this}}">Ping</a></li>
-    {{/each}}
-    </ul>
+    {{>header}}
+    <div class="container">
+        <!-- Content between requests -->
+        <div id="myModal" class="modal">
+            <div class="modal-content" style='text-align: left;'>
+                <span class="close">&times;</span>
+                    {{#if engagedWith}}
+                        <a href='http://localhost:3000/chat-user?initiator={{userName}}&receiver={{engagedWith}}&room={{roomNo}}'>{{engagedWith}}</a>
+                    {{/if}}
+                    
+                    {{#if noRequest}}
+                        <a>It's lonely here :/</a>
+                    {{/if}}
+            </div>
+        </div>
+        <div class="wrapper">
+            <h1>People Nearby You...</h1>
+            <br/>          
+            <p>Here, you will see people nearby you, who are registered with us!</p>
+            <br/>
+            <br/>
+            <ul>
+                {{#each peopleAroundU}}
+                    <p class='people-card'>{{this}} <a class='people-link' href="http://localhost:3000/begin-chat/{{this}}">Ping</a></p>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    {{>footer}}
+    <script>
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>

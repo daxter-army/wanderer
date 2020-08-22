@@ -1,0 +1,50 @@
+@font-face {
+    font-family: DM Sans;
+    src: url('../fonts/DMSansMedium.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: DM Sans;
+    font-size: larger;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+.container {
+    min-height: 89vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#detect-location {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+#detect-location:hover {
+    color: #3498db;
+}
+
+#search-people {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    transition: 0.1s;
+    cursor: not-allowed;
+}
+
+/* #search-people:hover {
+    color: #8e44ad;
+} */

@@ -3,43 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="css/chat/img/favicon.png">
     <link rel="stylesheet" href="css/chat/css/styles.css">
-    <title>Wanderer</title>
+    <title>Wanderer | Chat</title>
 </head>
+<style>
+    @font-face {
+        font-family: DM Sans;
+        src: url('../fonts/DMSansMedium.ttf');
+    }
+
+    body {
+        font-family: DM Sans;
+        font-size: larger;
+        min-height: 88vh;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .container {
+        min-height: 89vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #footer {
+        font-size: 16px;
+        text-align: center;
+        padding: 4px;
+        color: #303030;
+        background-color: white;
+        border-top: 1.5px #eeeeee solid;
+    }
+</style>
 <body>
-    <h1>From Chat client</h1>
-    <p>Room : <span id="room-no"></span></p>
-    <p>To : <span id="receiver"></span></p>
+    <div class="topnav" id="myTopnav">
+        <a href="/dashboard-user" class="active"><span id='initiator'></span></a>
+        <a href='/myLocation'>Discover Nearby</a>
+        <form id="logoutAll-form" action="/logoutAll-user" method="POST"><button class='form-button'>Logout All</button></form>
+        <form id="logout-form" action="/logout-user" method="POST"><button class='form-button'>Logout</button></form>
+        <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a> -->
+    </div>
+    <div class="container">
+        <div>
+            <br/>
+            <h1>Chat Section</h1>
+            <br/>
+            <p>Room : <span id="room-no"></span></p>
+            <p>Recepient : <span id="receiver"></span></p>
+            
+            <br/>
 
-    <div id="messages"></div>
+            <div id="messages"></div>
+        
+            <form id="message-form">
+                <input name="message" placeholder="Message" autocomplete="off" required>
+                <button id='send-message'>Send</button>
+            </form>
+            <button id="send-location" style="margin:5px 70px;">Share Location <i class="fa fa-compass fa-2x" style='vertical-align: middle;'></i></button>
 
-        <form id="message-form">
-            <input name="message" placeholder="Message" autocomplete="off" required>
-            <button>Send</button>
-        </form>
-        <button id="send-location">Share Location</button>
-
-        <script id="message-template" type="text/html">
-            <div class="message">
-                <p>
-                    <span class="message__name">{{username}}</span>
-                    <span class="message__meta">{{createdAt}}</span>
-                </p>
-                <p>{{message}}</p>
-            </div>
-        </script>
-
-        <script id="location-message-template" type="text/html">
-            <div class="message">
-                <p>
-                    <span class="message__name">{{username}}</span>
-                    <span class="message__meta">{{createdAt}}</span>
-                </p>
-                <p><a href={{url}} target="_blank">I am here</a></p>
-            </div>
-        </script>
-
+            <script id="message-template" type="text/html">
+                <div class="message">
+                    <p>
+                        <span class="message__name">{{username}}</span>
+                        <span class="message__meta">{{createdAt}}</span>
+                    </p>
+                    <p>{{message}}</p>
+                </div>
+            </script>
+            <script id="location-message-template" type="text/html">
+                <div class="message">
+                    <p>
+                        <span class="message__name">{{username}}</span>
+                        <span class="message__meta">{{createdAt}}</span>
+                    </p>
+                    <p><a href={{url}} target="_blank">I am here</a></p>
+                </div>
+            </script>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer id="footer">Made with ❤️ by <a href='https://github.com/daxter-army/' target="_blank" style='color:#303030;'>Mehul Singh Teya</a></footer>
     <!-- Loading JS Files -->
     <script src="/js/mustache.min.js"></script>
     <script src="/js/moment.js"></script>

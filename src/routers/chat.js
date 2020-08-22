@@ -11,7 +11,7 @@ const User = require('../models/user')
 const Chat = require('../models/chat')
 
 router.get('/begin-chat/:userName', auth, async (req, res) => {
-    console.log(chalk.cyan("GET : /begin-chat"))
+    // console.log(chalk.cyan("GET : /begin-chat"))
 
     const initiator = req.user.userName
     const receiver = req.params.userName
@@ -19,7 +19,7 @@ router.get('/begin-chat/:userName', auth, async (req, res) => {
     try{
 
         const check = await User.findOne({ userName: initiator})
-        console.log(chalk.blue(initiator + " already engaged with " + check.engagedWith))
+        // console.log(chalk.blue(initiator + " already engaged with " + check.engagedWith))
     
         if(receiver==check.engagedWith){
             return res.redirect(`http://localhost:3000/chat-user?initiator=${initiator}&receiver=${receiver}&room=${check.roomNo}`)
@@ -30,11 +30,11 @@ router.get('/begin-chat/:userName', auth, async (req, res) => {
         await User.findOneAndUpdate({ userName: initiator },{ engagedWith: receiver, roomNo: room })
         await User.findOneAndUpdate({ userName: receiver },{ engagedWith: initiator, roomNo: room })
         
-        console.log({
-            'initiator': initiator,
-            'receiver': receiver,
-            'room' : room
-        })
+        // console.log({
+        //     'initiator': initiator,
+        //     'receiver': receiver,
+        //     'room' : room
+        // })
 
         res.redirect(`/chat-user?initiator=${initiator}&receiver=${receiver}&room=${room}`)
     }
@@ -44,12 +44,12 @@ router.get('/begin-chat/:userName', auth, async (req, res) => {
 })
 
 router.get('/chat-user', auth, (req,res) => {
-    console.log(chalk.cyan("GET : /chat-user"))
+    // console.log(chalk.cyan("GET : /chat-user"))
     res.sendFile('D:\\wanderer_0.2_mutating\\src\\public\\chat.html')
 })
 
 router.post('/retrieve-chat',async (req, res) => {
-    console.log(chalk.yellow("POST : /retrieve-chat"))
+    // console.log(chalk.yellow("POST : /retrieve-chat"))
 
     const one = req.body.one
     const two = req.body.two
@@ -66,6 +66,5 @@ router.post('/retrieve-chat',async (req, res) => {
         res.status(500).send('Error while retrieving chats.')
     }
 })
-
 
 module.exports = router
