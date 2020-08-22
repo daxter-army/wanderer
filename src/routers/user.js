@@ -1,7 +1,7 @@
 const express = require('express')
 const multer = require('multer')
 const sharp = require('sharp')
-const chalk = require('chalk')
+// const chalk = require('chalk')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
 const router = new express.Router()

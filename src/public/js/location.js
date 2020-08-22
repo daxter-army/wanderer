@@ -35,7 +35,7 @@ document.querySelector('#detect-location').addEventListener('click', () => {
         })
 
         if(result){
-            lat_lon.innerHTML = "Latitude : " + position.coords.latitude + "<br>Longitude : " + position.coords.longitude + '<br/><br/><br/>Search nearby people'
+            lat_lon.innerHTML = "Latitude : " + position.coords.latitude + "<br>Longitude : " + position.coords.longitude
             document.getElementById('search-people').style.cursor = 'pointer'
         }
         else{

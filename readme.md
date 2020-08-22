@@ -19,5 +19,9 @@
     * Public : Only avatar and username is visible on your profile
     * Private : Your info will also be visible there
 
-### Status : Under Development
+### Status : Under Review
 * hit **npm run dev** to start dev server and visit **http://localhost:3000/**
+
+OR
+
+* *the website is live at **https://mehul-wanderer.herokuapp.com/**

@@ -76,7 +76,7 @@ router.post('/find-nearby', auth, async (req, res) => {
 
         const find = await Coordinate.find()
 
-        // console.log(lat_from.value, lon_from.value)
+        console.log(lat_from.value, lon_from.value)
         
         if(!(find || lat_from || lon_from))
             console.log(chalk.red("Database is Empty"))
