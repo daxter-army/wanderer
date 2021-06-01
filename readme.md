@@ -1,3 +1,5 @@
+# NOT COMPLETED
+
 # Wanderer
 * An Application which enables you to discover, meet, talk with people around you, **Anonymously**.
 
