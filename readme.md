@@ -1,5 +1,3 @@
-# Under Progress
-
 # Wanderer
 * An Application which enables you to discover, meet, talk with people around you, **Anonymously**.
 
@@ -23,7 +21,3 @@
 
 ### Status : Under Review
 * hit **npm run dev** to start dev server and visit **http://localhost:3000/**
-
-OR
-
-* *the website is live at **https://mehul-wanderer.herokuapp.com/**
